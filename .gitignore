@@ -8,3 +8,6 @@ dist/
 uploads/
 *.log
 .DS_Store
+
+# Data files — not code
+catalog_products.json
