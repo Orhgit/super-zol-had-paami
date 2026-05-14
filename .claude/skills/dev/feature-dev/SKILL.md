@@ -40,6 +40,24 @@ Phase 5: PR
 
 ## Phase -1: Constitutional Pre-flight
 
+## 🔴 Sacred Topics Gate — לפני הכל
+
+אם הבקשה נוגעת באחד מאלה → עצור מיד ודווח ל-HUMAN ללא דיון:
+- כסף / מחיר / חישוב מע"מ / אגורות
+- Prisma migration / שינוי schema
+- Auth / permissions / roles
+- Cardcom / חשבשבת / תשלומים
+- מחיקת data (delete, drop, truncate)
+- שינוי API חיצוני
+- Secrets / env variables
+
+**Reversibility:**
+🔒 IRREVERSIBLE — לא ניתן לבטל → HUMAN תמיד
+⏳ COSTLY — עולה יום עבודה לבטל → שאל לפני
+🔄 REVERSIBLE — ניתן לבטל תוך שעה → המשך
+
+---
+
 **Scope Declaration:** לפני הכל, הצהר על ה-branch ועל הקבצים שייגעו.
 
 **Devil's Advocate:** הצהר על:
@@ -50,6 +68,18 @@ Phase 5: PR
 - `git push`
 - PR create
 - `prisma db push` / `prisma migrate deploy`
+
+---
+
+## שלב -1 — Order Check
+
+לפני שמתחילים — בדוק:
+1. מה השלב הנוכחי של הפרויקט? (תשתית / עיצוב / לוגיקה / תוכן)
+2. האם כל מה שהסקיל הזה דורש כבר קיים?
+3. האם הפעולה המבוקשת מתאימה לשלב הנוכחי?
+
+כלל ברזל: לא מדלגים על שלבים.
+אם מגלים קפיצת שלב → HUMAN מיד עם הסבר.
 
 ---
 
@@ -64,6 +94,17 @@ Phase 5: PR
 שלוף מ-Linear עם MCP:
 - טיטל, תיאור, AC, sub-issues
 - attachments ו-mockups
+
+---
+
+## Phase 1.5: Blast Radius Scan
+
+@arch סורק לפני התכנון:
+- קבצים שייגעו לפי הסטורי: [רשימה ראשונית]
+- מה מייבא אותם: [grep]
+- האם יש feature קיים שעלול להישבר: [רשימה]
+
+**Gate:** אם Blast Radius חוצה קומפוננטים קריטיים (checkout, auth, DB schema) → HUMAN לפני תכנון.
 
 ---
 
@@ -126,6 +167,15 @@ Body הכולל:
 - [ ] Storybook stories לכל שינוי UI (R5)
 - [ ] Migration reversible (R6)
 - [ ] PR נוצר עם Linear mapping
+
+---
+
+## Pattern Detector
+
+אחרי כל פעולה — בדוק:
+האם בעיה דומה הופיעה 3+ פעמים בפרויקט?
+כן → צור Linear issue: "בעיה ארכיטקטורלית חוזרת: [נושא]"
+זו לא שאלה נקודתית — זה סימפטום של בעיה עמוקה יותר.
 
 ---
 

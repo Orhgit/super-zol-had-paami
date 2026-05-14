@@ -11,6 +11,24 @@ description: "כתוב קוד production-quality מתוך תכנית מאושר�
 
 ---
 
+## 🔴 Sacred Topics Gate — לפני הכל
+
+אם הבקשה נוגעת באחד מאלה → עצור מיד ודווח ל-HUMAN ללא דיון:
+- כסף / מחיר / חישוב מע"מ / אגורות
+- Prisma migration / שינוי schema
+- Auth / permissions / roles
+- Cardcom / חשבשבת / תשלומים
+- מחיקת data (delete, drop, truncate)
+- שינוי API חיצוני
+- Secrets / env variables
+
+**Reversibility:**
+🔒 IRREVERSIBLE — לא ניתן לבטל → HUMAN תמיד
+⏳ COSTLY — עולה יום עבודה לבטל → שאל לפני
+🔄 REVERSIBLE — ניתן לבטל תוך שעה → המשך
+
+---
+
 ## Step 0 — Consultation Receipt
 
 שורה ראשונה:
@@ -26,6 +44,18 @@ description: "כתוב קוד production-quality מתוך תכנית מאושר�
 2. בדוק `components/ui/` — אל תמציא מה שכבר קיים
 3. תכנן את ה-story (R5) — שינוי ויזואלי = story באותו PR
 4. וודא שעובד ב-mobile (320px+)
+
+---
+
+## שלב -1 — Order Check
+
+לפני שמתחילים — בדוק:
+1. מה השלב הנוכחי של הפרויקט? (תשתית / עיצוב / לוגיקה / תוכן)
+2. האם כל מה שהסקיל הזה דורש כבר קיים?
+3. האם הפעולה המבוקשת מתאימה לשלב הנוכחי?
+
+כלל ברזל: לא מדלגים על שלבים.
+אם מגלים קפיצת שלב → HUMAN מיד עם הסבר.
 
 ---
 
@@ -52,6 +82,11 @@ Files to change (בסדר):
 2. <file path> — ...
 סיבה לסדר: <למה deepest dependency ראשון>
 Files NOT to change: <קבצים ששקלת אך לא תשנה ולמה>
+
+Blast Radius:
+- קבצים נוספים שייפגעו (מעבר לרשימה): [grep תוצאות]
+- צרכנים ישירים: [מי מייבא את הקבצים שאני משנה]
+- סיכון regression: [מה עלול להישבר]
 ```
 
 רק אחרי כתיבת ה-plan — מתחילים לערוך. ה-plan הוא החוזה. אם סוטים ממנו — מצהירים על הסטייה לפני.
@@ -263,6 +298,15 @@ pnpm build          # build מצליח
 pnpm storybook:test # stories עוברים (אם יש)
 pnpm test           # unit tests עוברים
 ```
+
+---
+
+## Pattern Detector
+
+אחרי כל פעולה — בדוק:
+האם בעיה דומה הופיעה 3+ פעמים בפרויקט?
+כן → צור Linear issue: "בעיה ארכיטקטורלית חוזרת: [נושא]"
+זו לא שאלה נקודתית — זה סימפטום של בעיה עמוקה יותר.
 
 ---
 
