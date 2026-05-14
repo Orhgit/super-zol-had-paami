@@ -10,6 +10,38 @@ description: "בנה UI component, page, או layout לחנות. Storybook-first
 
 ---
 
+## 🔴 Sacred Topics Gate — לפני הכל
+
+אם הבקשה נוגעת באחד מאלה → עצור מיד ודווח ל-HUMAN ללא דיון:
+- כסף / מחיר / חישוב מע"מ / אגורות
+- Prisma migration / שינוי schema
+- Auth / permissions / roles
+- Cardcom / חשבשבת / תשלומים
+- מחיקת data (delete, drop, truncate)
+- שינוי API חיצוני
+- Secrets / env variables
+
+**Reversibility:**
+🔒 IRREVERSIBLE — לא ניתן לבטל → HUMAN תמיד
+⏳ COSTLY — עולה יום עבודה לבטל → שאל לפני
+🔄 REVERSIBLE — ניתן לבטל תוך שעה → המשך
+
+---
+
+## Order Check — האם ה-Backend מוכן?
+
+לפני בניית UI — בדוק:
+1. האם ה-API route שה-component יצרוך כבר קיים ומגיב?
+   - כן → ממשיך
+   - לא → בנה Storybook story עם mock data קודם, לא live API
+2. האם ה-Prisma schema כבר מגדיר את ה-data שה-component צריך?
+3. האם קיים component דומה ב-Storybook שאפשר להרחיב?
+
+כלל ברזל: לא בונים UI שמסתמך על API שלא קיים.
+אם ה-API לא קיים → בנה עם mock data + `TODO: connect to API when ready`
+
+---
+
 ## Step 0 — Consultation Receipt
 
 `Consulted: RULEBOOK R1, R2, R5, R12, R20, R23, R50, R51. Binding rules: <רלוונטיים>.`
@@ -141,6 +173,17 @@ export async function generateMetadata({ params }): Promise<Metadata> {
 
 ---
 
+## Blast Radius — לפני כל שינוי UI
+
+לפני שינוי component קיים:
+- מה ה-pages/layouts שמשתמשים ב-component זה? (grep)
+- האם ה-Storybook story עדיין תואמת לאחר השינוי?
+- האם שינוי props עלול לשבור consumers?
+
+אם component משמש ב-3+ מקומות → הכרז על השינוי לפני ביצועו.
+
+---
+
 ## Verification Gates לפני Complete
 
 ```bash
@@ -157,6 +200,15 @@ pnpm storybook:build    # stories מתקמפלות
 - [ ] error state עובד
 - [ ] RTL / Hebrew תקין
 - [ ] images עם alt תיאורי
+
+---
+
+## Pattern Detector
+
+אחרי כל פעולה — בדוק:
+האם בעיה דומה הופיעה 3+ פעמים בפרויקט?
+כן → צור Linear issue: "בעיה ארכיטקטורלית חוזרת: [נושא]"
+זו לא שאלה נקודתית — זה סימפטום של בעיה עמוקה יותר.
 
 ---
 

@@ -10,6 +10,57 @@ description: "סקור קוד לפני push או PR. בדוק מול כל חוק
 
 ---
 
+## 🔴 Sacred Topics Gate — לפני הכל
+
+אם הבקשה נוגעת באחד מאלה → עצור מיד ודווח ל-HUMAN ללא דיון:
+- כסף / מחיר / חישוב מע"מ / אגורות
+- Prisma migration / שינוי schema
+- Auth / permissions / roles
+- Cardcom / חשבשבת / תשלומים
+- מחיקת data (delete, drop, truncate)
+- שינוי API חיצוני
+- Secrets / env variables
+
+**Reversibility:**
+🔒 IRREVERSIBLE — לא ניתן לבטל → HUMAN תמיד
+⏳ COSTLY — עולה יום עבודה לבטל → שאל לפני
+🔄 REVERSIBLE — ניתן לבטל תוך שעה → המשך
+
+---
+
+## Auto-BLOCK — עוצרים PR ללא שאלות
+
+אם ה-diff מכיל אחד מהבאים → BLOCK אוטומטי, ללא הצבעה:
+- 🔒 מחיקת data ללא rollback מתועד
+- 🔒 migration ב-production שאינו reversible
+- 🔒 secrets בקוד (API keys, passwords)
+- 🔒 Float לכסף (`price: 3.99`, `parseFloat`, `toFixed` בלוגיק עסקי)
+- 🔒 Stripe/Cardcom call מחוץ ל-`lib/payments/`
+- 🔒 webhook ללא signature verification
+
+פורמט BLOCK:
+```
+🚫 AUTO-BLOCK
+
+סיבה: [מה נמצא]
+קובץ/שורה: [file:line]
+חוק: R<id>
+כיצד לתקן: [הסבר קצר]
+```
+
+---
+
+## Order Check — לפני ה-Review
+
+לפני שמתחילים לסקור — בדוק:
+האם ה-PR מגיע מ-branch נכון? (feat/SUP-<id>-...)
+האם ה-PR לא נוגע בתשתיות שלא הושלמו?
+האם יש migration ללא מה שאחריו?
+
+אם ה-PR מדלג שלב → BLOCK עם הסבר.
+
+---
+
 ## Step 0 — Consultation Receipt
 
 `Consulted: RULEBOOK R1–R53. Binding rules: <כל הרלוונטיים לדiff>.`
@@ -101,6 +152,15 @@ description: "סקור קוד לפני push או PR. בדוק מול כל חוק
 ### ✅ Looks Good
 - מה עובד טוב ואפשר לשמר
 ```
+
+---
+
+## Pattern Detector
+
+אחרי כל פעולה — בדוק:
+האם בעיה דומה הופיעה 3+ פעמים בפרויקט?
+כן → צור Linear issue: "בעיה ארכיטקטורלית חוזרת: [נושא]"
+זו לא שאלה נקודתית — זה סימפטום של בעיה עמוקה יותר.
 
 ---
 
