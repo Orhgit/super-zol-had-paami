@@ -41,6 +41,8 @@
 | pipeline שלם: Linear → PR | `feature-dev` |
 | בניית UI component / page | `frontend-design` |
 | code review לפני push | `code-reviewer` |
+| ספק טכני / ארכיטקטורה / נקודות שבירה | `nextjs-senior-team` |
+| החלטות אוטונומיות / מועצת מומחים | `auto-decider` |
 
 ## 🏗️ ארכיטקטורה
 
