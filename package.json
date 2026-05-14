@@ -1,0 +1,16 @@
+{
+  "name": "super-zol-had-paami",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev:backend": "pnpm --filter backend dev",
+    "dev:storefront": "pnpm --filter storefront dev",
+    "build": "pnpm --filter backend build && pnpm --filter storefront build",
+    "typecheck": "pnpm --filter backend typecheck && pnpm --filter storefront typecheck",
+    "lint": "pnpm --filter backend lint && pnpm --filter storefront lint"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
